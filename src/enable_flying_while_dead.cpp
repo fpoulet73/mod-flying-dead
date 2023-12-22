@@ -3,6 +3,7 @@
 #include "Config.h"
 #include "World.h"
 #include "Chat.h"
+#include <string.h>
 
 #define DeadlyGladiatorsFrostWyrm_ModelID1 25511 // http://wotlk.cavernoftime.com/npc=34225
 #define DEFAULT_RUNNING_SPEED 1.0f
@@ -35,6 +36,21 @@ public:
 
         if (config_EnableFlyingWhileDead)
         {
+/*
+    char *token = strtok(_Disable_InAreas, ",");
+    while (token != NULL) {
+                if (player->GetAreaId() == (atoi(token)))
+                {
+                    // Print message to see if it's working
+                    //ChatHandler(player->GetSession()).PSendSysMessage("FlyingWhileDead: Disabled in area id: %i", player->GetAreaId());
+                    //printf("> FlyingWhileDead: Disabled in area id: %i", player->GetAreaId());
+                    return;
+                }
+        
+        token = strtok(NULL, ",");
+    }
+*/
+/*
             Tokenizer areas(_Disable_InAreas, ',');
             for (uint8 i = 0; i < areas.size(); )
             {
@@ -46,6 +62,7 @@ public:
                     return;
                 }
             }
+*/            
 
             if (config_EnableFlyingWhileDead_InBattleground == false && player->InBattleground())
                 return; 
@@ -109,28 +126,31 @@ public:
     void OnStartup() override
     {
         // Show this On worldserver startup
+        /*
         sLog->outString("");
         sLog->outString("=========================================");
         sLog->outString("== Loaded mod enable_flying_while_dead ==");
         sLog->outString("=========================================");
         sLog->outString("");
+        */
     }
 
     void OnAfterConfigLoad(bool reload) override
     {
         if (reload)
         {
-            // Show this if ".reload config" command is used
+/*            // Show this if ".reload config" command is used
             sLog->outString("");
             sLog->outString("============================================");
             sLog->outString("== Re-Loaded mod enable_flying_while_dead ==");
             sLog->outString("============================================");
             sLog->outString("");
+*/            
         }
     }
 };
 
-void AddSC_enable_flying_while_dead()
+void AddFLyingDeadScripts()
 {
     new enable_flying_while_dead();
     new enable_flying_while_dead_World();
